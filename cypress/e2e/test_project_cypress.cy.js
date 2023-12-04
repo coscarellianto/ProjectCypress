@@ -19,8 +19,7 @@ it('Iniciar AliExpress', function(){
     cy.get('#search-words').click()
     cy.get('#search-words').type('Iphone{enter}')
     cy.get('.comet-pagination-next > .comet-pagination-item-link').click()
-    cy.get('#card-list > :nth-child(2)')
+    cy.get('#card-list > :nth-child(2)').should('be.visible')
+    cy.get(':nth-child(2) > .multi--outWrapper--SeJ8lrF > .multi--container--1UZxxHY > .multi--image--2bIiWPB > .multi--shopCart--darm7xs').click()
   
-
-
 })
