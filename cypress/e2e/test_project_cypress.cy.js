@@ -11,4 +11,16 @@ it('Iniciar AliExpress', function(){
     cy.visit('https://www.aliexpress.com')
     cy.get(':nth-child(1) > #gdpr-new-container')
     cy.get('.btn-accept').click()
+    /* cy.get('.image-poplayer-modal')
+      .get('.pop-content')
+      .get('img.pop-close-btn').click() */
+
+    cy.get('.image-poplayer-modal').parent().invoke('remove');
+    cy.get('#search-words').click()
+    cy.get('#search-words').type('Iphone{enter}')
+    cy.get('.comet-pagination-next > .comet-pagination-item-link').click()
+    cy.get('#card-list > :nth-child(2)')
+  
+
+
 })
