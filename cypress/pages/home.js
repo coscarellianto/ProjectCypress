@@ -4,6 +4,9 @@ export class homePage {
         this.url = 'https://www.aliexpress.com/';
         this.cookiesManagement = ':nth-child(1) > #gdpr-new-container';
         this.cookiesAcceptButton = '.btn-accept';
+        this.personalizeCookiesButtonLocator = '.btn-more';
+        this.closeWindowPersonalize = '.ui-window-close';
+        this.cookiesSaveButtonLocator = '.btn-save';
         this.popUpModal = '.image-poplayer-modal';
         this.searchBar = '#search-words';
         this.searchButton = '.search--submit--2VTbd-T';
@@ -16,6 +19,18 @@ export class homePage {
 
     checkCookiesManagement(){
         cy.get(this.cookiesManagement).should('be.visible');
+    }
+
+    personalizeCookiesButton(){
+        cy.get(this.personalizeCookiesButtonLocator).click()
+    }
+
+    clickSaveCookiesButton(){
+        cy.get(this.cookiesSaveButtonLocator).click()
+    }
+
+    closeWindowCookiesPersonalize(){
+        cy.get(this.closeWindowPersonalize).click()
     }
 
     acceptManagementCookies(){

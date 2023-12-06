@@ -6,6 +6,9 @@ const home_page = new homePage()
 import { searchPage } from "../pages/search";
 let search_page = new searchPage()
 
+import { articlesPage } from "../pages/articles";
+let articles_page = new articlesPage()
+
 
 Cypress.on('uncaught:exception', (err, runnable) => {
     if (err.message.includes('ResizeObserver')) {
@@ -30,5 +33,10 @@ Cypress.on('uncaught:exception', (err, runnable) => {
       search_page.clickNextPage();
       search_page.checkSecondArticle();
       search_page.clickShoppingCard()
+      articles_page.getStockText().then((stockText) => {
+        cy.log(`Stock del artículo: ${stockText}`)
+        expect(parseInt(stockText)).to.be.greaterThan(0);
+    });
     })
   })
+  
