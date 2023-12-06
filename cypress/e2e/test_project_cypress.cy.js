@@ -1,32 +1,34 @@
 /// <reference types="cypress" />
 
-import { searchPage } from "../page_objects/search.cy";
-const search_page = new searchPage()
+import { homePage } from "../pages/home";
+const home_page = new homePage()
+
+import { searchPage } from "../pages/search";
+let search_page = new searchPage()
+
 
 Cypress.on('uncaught:exception', (err, runnable) => {
     if (err.message.includes('ResizeObserver')) {
-      // Evitar que Cypress falle por errores relacionados con ResizeObserver
+      // Prevent Cypress from crashing due to ResizeObserver-related errors
       return false;
     }
   });
   
-describe('Navigate to AliExpress', function(){
-    cy.visit('https://www.aliexpress.com')
-    cy.get(':nth-child(1) > #gdpr-new-container')
-    cy.get('.btn-accept').click()
-    /* cy.get('.image-poplayer-modal')
-      .get('.pop-content')
-      .get('img.pop-close-btn').click() */
-    cy.get('.image-poplayer-modal').parent().invoke('remove');
-})
+  describe('Search element and check the stock', function(){
+    beforeEach(function () {
+        home_page.navigate();
+        home_page.checkCookiesManagement();
+        home_page.acceptManagementCookies();
+        home_page.closePopUpModal();
+    });
 
     //Search
     it('Search Element', function(){
-      search_page.clickSearchBar();
-      search_page.typeSearchEnter('iphone{enter}');
-      cy.get('.comet-pagination-next > .comet-pagination-item-link').click()
-      cy.get('#card-list > :nth-child(2)').should('be.visible')
-      cy.get(':nth-child(2) > .multi--outWrapper--SeJ8lrF > .multi--container--1UZxxHY > .multi--image--2bIiWPB > .multi--shopCart--darm7xs').click()
-    
+      home_page.clickSearchBar();
+      home_page.typeSearchEnter('iphone');
+      home_page.clickSearchButton();
+      search_page.clickNextPage();
+      search_page.checkSecondArticle();
+      search_page.clickShoppingCard()
     })
-    
+  })
