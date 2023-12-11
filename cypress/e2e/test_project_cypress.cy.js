@@ -22,6 +22,7 @@ describe('Search element and check the stock', () => {
       home_page.navigate();
       home_page.checkCookiesManagement();
       home_page.acceptManagementCookies();
+      cy.wait(3000);
       home_page.closePopUpModal();
   });
 
@@ -31,6 +32,7 @@ describe('Search element and check the stock', () => {
     home_page.typeSearchEnter('iphone');
     home_page.clickSearchButton();
     search_page.checkComponentPagination();
+    search_page.checkSecondTwoPaginationExists();
     search_page.clickNextPage();
     search_page.checkSecondArticle();
     search_page.clickShoppingCard()

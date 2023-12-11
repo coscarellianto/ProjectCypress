@@ -11,6 +11,10 @@ export class searchPage {
         cy.get(this.paginationComponent).should('exist')
     }
 
+    checkSecondTwoPaginationExists(){
+        cy.get(this.paginationButton).should('exist')
+    }
+
     clickNextPage(){
         cy.get(this.paginationButton).click()
     }
