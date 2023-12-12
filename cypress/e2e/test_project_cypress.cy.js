@@ -1,14 +1,13 @@
 /// <reference types="cypress" />
 
 import { homePage } from "../pages/home";
-const home_page = new homePage()
+const home_page = new homePage();
 
 import { searchPage } from "../pages/search";
-let search_page = new searchPage()
+const search_page = new searchPage();
 
 import { articlesPage } from "../pages/articles";
-let articles_page = new articlesPage()
-
+const articles_page = new articlesPage();
 
 Cypress.on('uncaught:exception', (err, runnable) => {
   if (err.message.includes('ResizeObserver')) {
@@ -16,30 +15,80 @@ Cypress.on('uncaught:exception', (err, runnable) => {
     return false;
   }
 });
-  
+
 describe('Search element and check the stock', () => {
-  beforeEach(function () {
-      home_page.navigate();
-      home_page.checkCookiesManagement();
-      home_page.acceptManagementCookies();
-      cy.wait(3000);
-      home_page.closePopUpModal();
+  beforeEach(() => {
+    home_page.navigate();
+    cy.wait(2000);
+    home_page.checkCookiesManagement();
+    home_page.acceptManagementCookies();
+    cy.wait(3000);
+    home_page.closePopUpModal();
   });
 
-  //Search
-  it('Search Element',() => {
+  // Search
+  it('Search Element, navigate from item', () => {
+    home_page.clickSearchBar();
+    home_page.searchDiscoverMore();
+    home_page.typeSearchEnter('iphone');
+    home_page.clickSearchButton();
+    search_page.checkComponentPagination();
+    search_page.checkPaginationExists();
+    search_page.clickNumberPaginationButton();
+    search_page.checkArticle();
+    search_page.clickShoppingCard();
+    articles_page.getStockText().then((stockText) => {
+      cy.log(`Article stock:: ${stockText}`);
+      expect(parseInt(stockText)).to.be.greaterThan(0);
+    });
+  });
+
+  it('Search Element navigate from next button', () => {
     home_page.clickSearchBar();
     home_page.typeSearchEnter('iphone');
     home_page.clickSearchButton();
     search_page.checkComponentPagination();
-    search_page.checkSecondTwoPaginationExists();
-    search_page.clickNextPage();
-    search_page.checkSecondArticle();
-    search_page.clickShoppingCard()
+    search_page.clickNextButton();
+    search_page.checkArticle();
+    search_page.clickShoppingCard();
     articles_page.getStockText().then((stockText) => {
-      cy.log(`Stock del artículo: ${stockText}`)
+      cy.log(`Article stock:: ${stockText}`);
       expect(parseInt(stockText)).to.be.greaterThan(0);
     });
-  })
-})
-  
+  });
+
+  it('Search Element navigate from type number of page', () => {
+    home_page.clickSearchBar();
+    home_page.typeSearchEnter('iphone');
+    home_page.clickSearchButton();
+    search_page.checkComponentPagination();
+    search_page.typePaginationNumber(2);
+    search_page.clickConfirmationButton();
+    search_page.checkArticle();
+    search_page.clickShoppingCard();
+    articles_page.getStockText().then((stockText) => {
+      cy.log(`Article stock:: ${stockText}`);
+      expect(parseInt(stockText)).to.be.greaterThan(0);
+    });
+  });
+
+  it('Search item and wait if it has 0 stock otherwise log message', () => {
+    home_page.clickSearchBar();
+    home_page.typeSearchEnter('iphone');
+    home_page.clickSearchButton();
+    search_page.checkComponentPagination();
+    search_page.typePaginationNumber(2);
+    search_page.clickConfirmationButton();
+    search_page.checkArticle();
+    search_page.clickShoppingCard();
+    articles_page.getStockText().then((stockText) => {
+      const stockQuantity = parseInt(stockText);
+      cy.log(`Article stock: ${stockQuantity}`);
+      if (stockQuantity === 0) {
+        expect(stockQuantity).to.eq(0);
+      } else {
+        cy.log(`The stock of the item is not zero. Current stock: ${stockQuantity}`);
+      }
+    });
+  });
+});

@@ -9,6 +9,7 @@ export class homePage {
         this.cookiesSaveButtonLocator = '.btn-save';
         this.popUpModal = '.image-poplayer-modal';
         this.searchBar = '#search-words';
+        this.discoverMore = '[data-spm="discover_more"] > .src--title--1Scd3D2'
         this.searchButton = '.search--submit--2VTbd-T';
         this.nextPageButton = '.comet-pagination-next > .comet-pagination-item-link'
     }
@@ -45,12 +46,16 @@ export class homePage {
         cy.get(this.searchBar).click()
     }
 
+    searchDiscoverMore(){
+        cy.get(this.discoverMore).should('be.visible')
+    }
+
     typeSearchEnter(element){
         cy.get(this.searchBar).type(element)
     }
 
     clickSearchButton(){
-        cy.get(this.searchButton).click()
+        cy.get(this.searchButton).should('be.be.visible').click()
     }
 
 }
