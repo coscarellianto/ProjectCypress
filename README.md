@@ -9,6 +9,7 @@ This project is designed to automate test cases for the AliExpress website (http
 - Cypress: JavaScript end-to-end testing framework.
 - Mocha: Test framework for JavaScript.
 - Chai: Assertion library for Node.js.
+- Import: cypress-wait-until library 
 
 
 **Prerequisites**

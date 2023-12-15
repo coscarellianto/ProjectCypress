@@ -1,3 +1,8 @@
+import {basePage} from "../pages/base";
+const base_page = new basePage();
+
+import 'cypress-wait-until';
+
 export class homePage {
     //Locators
     constructor(){
@@ -19,43 +24,54 @@ export class homePage {
     }
 
     checkCookiesManagement(){
-        cy.get(this.cookiesManagement).should('be.visible');
+        base_page.checkElementVisibility(this.cookiesManagement);
     }
 
     personalizeCookiesButton(){
-        cy.get(this.personalizeCookiesButtonLocator).click()
+        base_page.clickElement(this.personalizeCookiesButtonLocator)
     }
 
     clickSaveCookiesButton(){
-        cy.get(this.cookiesSaveButtonLocator).click()
+        base_page.clickElement(this.cookiesSaveButtonLocator)
     }
 
     closeWindowCookiesPersonalize(){
-        cy.get(this.closeWindowPersonalize).click()
+        base_page.clickElement(this.closeWindowPersonalize)
     }
 
     acceptManagementCookies(){
-        cy.get(this.cookiesAcceptButton).click();
+        base_page.clickElement(this.cookiesAcceptButton)
     }
 
-    closePopUpModal(){
-        cy.get(this.popUpModal).parent().invoke('remove');
+    closePopUpModal() {
+        cy.waitUntil(() => 
+            base_page.checkElementVisibility(this.popUpModal, {
+                timeout: 10000, 
+                interval: 500
+            })
+        .then(() => {
+            cy.get(this.popUpModal).parent().invoke('hide');
+        }));
     }
 
     clickSearchBar(){
-        cy.get(this.searchBar).click()
+        base_page.clickElement(this.searchBar)
     }
 
     searchDiscoverMore(){
-        cy.get(this.discoverMore).should('be.visible')
+        base_page.checkElementVisibility(this.discoverMore)
     }
 
-    typeSearchEnter(element){
-        cy.get(this.searchBar).type(element)
+    typeSearchEnter(searchTerm){
+        base_page.typeElement(this.searchBar, searchTerm)
     }
 
+    checkSearchButton(){
+       base_page.checkElementVisibility(this.searchButton)
+    }
+    
     clickSearchButton(){
-        cy.get(this.searchButton).should('be.be.visible').click()
+       base_page.clickElement(this.searchButton)
     }
 
 }

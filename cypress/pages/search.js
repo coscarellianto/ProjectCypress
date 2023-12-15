@@ -1,3 +1,6 @@
+import {basePage} from "../pages/base";
+const base_page = new basePage();
+
 export class searchPage {
     //Locators
     constructor(){
@@ -11,34 +14,42 @@ export class searchPage {
     }
 
     checkComponentPagination(){
-        cy.get(this.paginationComponent).should('exist')
+        base_page.checkElementExistence(this.paginationComponent)
     }
 
     checkPaginationExists(){
-        cy.get(this.paginationButton).should('exist')
+        base_page.checkElementExistence(this.paginationButton)
     }
     
     clickNumberPaginationButton(){
-        cy.get(this.paginationButton).click()
+        base_page.clickElement(this.paginationButton)
+    }
+
+    checkNextButton(){
+        base_page.checkElementExistence(this.nextPaginationButton)
     }
 
     clickNextButton(){
-        cy.get(this.nextPaginationButton).should('exist').click()
+        base_page.clickElement(this.nextPaginationButton)
     }
 
     typePaginationNumber(number){
-        cy.get(this.pageLocatorInput).type(number)
+        base_page.typeElement(this.pageLocatorInput, number)
+    }
+
+    checkConfirmationButton(){
+        base_page.checkElementExistence(this.confirmationButton)
     }
 
     clickConfirmationButton(){
-        cy.get(this.confirmationButton).should('exist').click()
+        base_page.clickElement(this.confirmationButton)
     }
 
     checkArticle(){
-        cy.get(this.CardList).should('be.visible')
+        base_page.checkElementVisibility(this.CardList)
     }
 
     clickShoppingCard(){
-        cy.get(this.shoppingCard).click()
+        base_page.clickElement(this.shoppingCard)
     }
 }
