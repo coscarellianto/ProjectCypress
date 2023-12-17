@@ -2,7 +2,7 @@
 
 **Description**
 
-This project is designed to automate test cases for the AliExpress website (https://www.aliexpress.com) using Cypress with Mocha and Chai. The primary objective is to navigate to the AliExpress page, search for the iPhone, go to the second page of search results, click on the second item, and verify if it has available stock.
+This project is designed to automate test cases for the AliExpress website (https://www.aliexpress.com) using Cypress with Mocha and Chai. The objective is to search “iPhone” in the AliExpress page, and verify if the second item on the second results page has stock.
 
 
 **Technologies**
@@ -10,7 +10,7 @@ This project is designed to automate test cases for the AliExpress website (http
 - Mocha: Test framework for JavaScript.
 - Chai: Assertion library for Node.js.
 - Mochawesome and mochawesome-merge to build the report
-- Import: cypress-wait-until library 
+- cypress-wait-until library 
 
 
 **Prerequisites**
