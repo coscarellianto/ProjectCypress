@@ -1,11 +1,11 @@
-import {basePage} from "../pages/base";
-const base_page = new basePage();
+import {BasePage} from "../pages/base";
 
 import 'cypress-wait-until';
 
-export class homePage {
+export class HomePage extends BasePage{
     //Locators
     constructor(){
+        super();
         this.url = 'https://www.aliexpress.com/';
         this.cookiesManagement = ':nth-child(1) > #gdpr-new-container';
         this.cookiesAcceptButton = '.btn-accept';
@@ -24,28 +24,28 @@ export class homePage {
     }
 
     checkCookiesManagement(){
-        base_page.checkElementVisibility(this.cookiesManagement);
+        this.checkElementVisibility(this.cookiesManagement);
     }
 
     personalizeCookiesButton(){
-        base_page.clickElement(this.personalizeCookiesButtonLocator)
+        this.clickElement(this.personalizeCookiesButtonLocator)
     }
 
     clickSaveCookiesButton(){
-        base_page.clickElement(this.cookiesSaveButtonLocator)
+        this.clickElement(this.cookiesSaveButtonLocator)
     }
 
     closeWindowCookiesPersonalize(){
-        base_page.clickElement(this.closeWindowPersonalize)
+        this.clickElement(this.closeWindowPersonalize)
     }
 
     acceptManagementCookies(){
-        base_page.clickElement(this.cookiesAcceptButton)
+        this.clickElement(this.cookiesAcceptButton)
     }
 
     closePopUpModal() {
         cy.waitUntil(() => 
-            base_page.checkElementVisibility(this.popUpModal, {
+            this.checkElementVisibility(this.popUpModal, {
                 timeout: 10000, 
                 interval: 500
             })
@@ -55,23 +55,23 @@ export class homePage {
     }
 
     clickSearchBar(){
-        base_page.clickElement(this.searchBar)
+        this.clickElement(this.searchBar)
     }
 
     searchDiscoverMore(){
-        base_page.checkElementVisibility(this.discoverMore)
+        this.checkElementVisibility(this.discoverMore)
     }
 
     typeSearchEnter(searchTerm){
-        base_page.typeElement(this.searchBar, searchTerm)
+        this.typeElement(this.searchBar, searchTerm)
     }
 
     checkSearchButton(){
-       base_page.checkElementVisibility(this.searchButton)
+       this.checkElementVisibility(this.searchButton)
     }
-    
+
     clickSearchButton(){
-       base_page.clickElement(this.searchButton)
+       this.clickElement(this.searchButton)
     }
 
 }

@@ -1,9 +1,10 @@
-import {basePage} from "../pages/base";
-const base_page = new basePage();
+import {BasePage} from "../pages/base";
 
-export class searchPage {
+
+export class SearchPage extends BasePage{
     //Locators
     constructor(){
+        super();
         this.paginationComponent = '.comet-pagination';
         this.paginationButton = '.comet-pagination-item-2 > a';
         this.CardList = '#card-list > :nth-child(2)';
@@ -14,42 +15,42 @@ export class searchPage {
     }
 
     checkComponentPagination(){
-        base_page.checkElementExistence(this.paginationComponent)
+        this.checkElementExistence(this.paginationComponent)
     }
 
     checkPaginationExists(){
-        base_page.checkElementExistence(this.paginationButton)
+        this.checkElementExistence(this.paginationButton)
     }
     
     clickNumberPaginationButton(){
-        base_page.clickElement(this.paginationButton)
+        this.clickElement(this.paginationButton)
     }
 
     checkNextButton(){
-        base_page.checkElementExistence(this.nextPaginationButton)
+        this.checkElementExistence(this.nextPaginationButton)
     }
 
     clickNextButton(){
-        base_page.clickElement(this.nextPaginationButton)
+        this.clickElement(this.nextPaginationButton)
     }
 
     typePaginationNumber(number){
-        base_page.typeElement(this.pageLocatorInput, number)
+        this.typeElement(this.pageLocatorInput, number)
     }
 
     checkConfirmationButton(){
-        base_page.checkElementExistence(this.confirmationButton)
+        this.checkElementExistence(this.confirmationButton)
     }
 
     clickConfirmationButton(){
-        base_page.clickElement(this.confirmationButton)
+        this.clickElement(this.confirmationButton)
     }
 
     checkArticle(){
-        base_page.checkElementVisibility(this.CardList)
+        this.checkElementVisibility(this.CardList)
     }
 
     clickShoppingCard(){
-        base_page.clickElement(this.shoppingCard)
+        this.clickElement(this.shoppingCard)
     }
 }

@@ -1,13 +1,13 @@
 /// <reference types="cypress" />
 
-import { homePage } from "../pages/home";
-const home_page = new homePage();
+import { HomePage } from "../pages/home";
+const home_page = new HomePage();
 
-import { searchPage } from "../pages/search";
-const search_page = new searchPage();
+import { SearchPage } from "../pages/search";
+const search_page = new SearchPage();
 
-import { articlesPage } from "../pages/articles";
-const articles_page = new articlesPage();
+import { ArticlesPage } from "../pages/articles";
+const articles_page = new ArticlesPage();
 
 
 Cypress.on('uncaught:exception', (err, runnable) => {
@@ -38,7 +38,7 @@ describe('Search element and check the stock', () => {
     search_page.clickNumberPaginationButton();
     search_page.checkArticle();
     search_page.clickShoppingCard();
-    articles_page.getStockAndVerifyGreaterThanZero()
+    articles_page.getStock()
   });
 
   it('Search Element navigate from next button', () => {
@@ -52,7 +52,7 @@ describe('Search element and check the stock', () => {
     search_page.clickNextButton();
     search_page.checkArticle();
     search_page.clickShoppingCard();
-    articles_page.getStockAndVerifyGreaterThanZero()
+    articles_page.getStock()
   });
 
   it('Search Element navigate from type number of page', () => {
@@ -68,7 +68,7 @@ describe('Search element and check the stock', () => {
     search_page.clickConfirmationButton();
     search_page.checkArticle();
     search_page.clickShoppingCard();
-    articles_page.getStockAndVerifyGreaterThanZero()
+    articles_page.getStock()
   });
 
   it('Search item and wait if it has 0 stock otherwise log message', () => {
@@ -84,6 +84,6 @@ describe('Search element and check the stock', () => {
     search_page.clickConfirmationButton();
     search_page.checkArticle();
     search_page.clickShoppingCard();
-    articles_page.checkStockZeroAndLog()
+    articles_page.checkStock()
   })
 })

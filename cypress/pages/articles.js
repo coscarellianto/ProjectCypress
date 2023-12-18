@@ -1,4 +1,4 @@
-export class articlesPage {
+export class ArticlesPage {
     // Locators
     constructor() {
       this.quantityStock = '.quantity--info--Lv_Aw6e > div > span';
@@ -8,14 +8,14 @@ export class articlesPage {
       return cy.get(this.quantityStock).invoke('text');
     }
   
-    getStockAndVerifyGreaterThanZero() {
+    getStock(){
       this.getStockText().then((stockText) => {
         cy.log(`Article stock:: ${stockText}`);
         expect(parseInt(stockText)).to.be.greaterThan(0);
       });
     }
 
-    checkStockZeroAndLog() {
+    checkStock() {
         this.getStockText().then((stockText) => {
           const stockQuantity = parseInt(stockText);
           cy.log(`Article stock: ${stockQuantity}`);
