@@ -1,55 +1,54 @@
-import {basePage} from "../pages/base";
-const base_page = new basePage();
+import { BasePage } from "../pages/base";
 
-export class searchPage {
+
+export class SearchPage extends BasePage {
     //Locators
-    constructor(){
-        this.paginationComponent = '.comet-pagination';
-        this.paginationButton = '.comet-pagination-item-2 > a';
-        this.CardList = '#card-list > :nth-child(2)';
-        this.nextPaginationButton = '.comet-pagination-next > .comet-pagination-item-link'
-        this.pageLocatorInput = '.comet-pagination-options-quick-jumper > input'
-        this.confirmationButton = '.comet-pagination-options-quick-jumper-button'
-        this.shoppingCard = ':nth-child(2) > .multi--outWrapper--SeJ8lrF > .multi--container--1UZxxHY > .multi--image--2bIiWPB > .multi--shopCart--darm7xs'
+    static paginationComponent = '.comet-pagination';
+    static paginationButton = '.comet-pagination-item-2 > a';
+    static CardList = '#card-list > :nth-child(2)';
+    static nextPaginationButton = '.comet-pagination-next > .comet-pagination-item-link'
+    static pageLocatorInput = '.comet-pagination-options-quick-jumper > input'
+    static confirmationButton = '.comet-pagination-options-quick-jumper-button'
+    static shoppingCard = ':nth-child(2) > .multi--outWrapper--SeJ8lrF > .multi--container--1UZxxHY > .multi--image--2bIiWPB > .multi--shopCart--darm7xs'
+
+
+    checkComponentPagination() {
+        this.checkElementExistence(SearchPage.paginationComponent)
     }
 
-    checkComponentPagination(){
-        base_page.checkElementExistence(this.paginationComponent)
+    checkPaginationExists() {
+        this.checkElementExistence(SearchPage.paginationButton)
     }
 
-    checkPaginationExists(){
-        base_page.checkElementExistence(this.paginationButton)
-    }
-    
-    clickNumberPaginationButton(){
-        base_page.clickElement(this.paginationButton)
+    clickNumberPaginationButton() {
+        this.clickElement(SearchPage.paginationButton)
     }
 
-    checkNextButton(){
-        base_page.checkElementExistence(this.nextPaginationButton)
+    checkNextButton() {
+        this.checkElementExistence(SearchPage.nextPaginationButton)
     }
 
-    clickNextButton(){
-        base_page.clickElement(this.nextPaginationButton)
+    clickNextButton() {
+        this.clickElement(SearchPage.nextPaginationButton)
     }
 
-    typePaginationNumber(number){
-        base_page.typeElement(this.pageLocatorInput, number)
+    typePaginationNumber(number) {
+        this.typeElement(SearchPage.pageLocatorInput, number)
     }
 
-    checkConfirmationButton(){
-        base_page.checkElementExistence(this.confirmationButton)
+    checkConfirmationButton() {
+        this.checkElementExistence(SearchPage.confirmationButton)
     }
 
-    clickConfirmationButton(){
-        base_page.clickElement(this.confirmationButton)
+    clickConfirmationButton() {
+        this.clickElement(SearchPage.confirmationButton)
     }
 
-    checkArticle(){
-        base_page.checkElementVisibility(this.CardList)
+    checkArticle() {
+        this.checkElementVisibility(SearchPage.CardList)
     }
 
-    clickShoppingCard(){
-        base_page.clickElement(this.shoppingCard)
+    clickShoppingCard() {
+        this.clickElement(SearchPage.shoppingCard)
     }
 }
