@@ -1,77 +1,75 @@
-import {basePage} from "../pages/base";
-const base_page = new basePage();
+import { BasePage } from "../pages/base";
 
 import 'cypress-wait-until';
 
-export class homePage {
+export class HomePage extends BasePage {
     //Locators
-    constructor(){
-        this.url = 'https://www.aliexpress.com/';
-        this.cookiesManagement = ':nth-child(1) > #gdpr-new-container';
-        this.cookiesAcceptButton = '.btn-accept';
-        this.personalizeCookiesButtonLocator = '.btn-more';
-        this.closeWindowPersonalize = '.ui-window-close';
-        this.cookiesSaveButtonLocator = '.btn-save';
-        this.popUpModal = '.image-poplayer-modal';
-        this.searchBar = '#search-words';
-        this.discoverMore = '[data-spm="discover_more"] > .src--title--1Scd3D2'
-        this.searchButton = '.search--submit--2VTbd-T';
-        this.nextPageButton = '.comet-pagination-next > .comet-pagination-item-link'
+    static url = 'https://www.aliexpress.com/';
+    static cookiesManagement = ':nth-child(1) > #gdpr-new-container';
+    static cookiesAcceptButton = '.btn-accept';
+    static personalizeCookiesButtonLocator = '.btn-more';
+    static closeWindowPersonalize = '.ui-window-close';
+    static cookiesSaveButtonLocator = '.btn-save';
+    static popUpModal = '.image-poplayer-modal';
+    static searchBar = '#search-words';
+    static discoverMore = '[data-spm="discover_more"] > .src--title--1Scd3D2'
+    static searchButton = '.search--submit--2VTbd-T';
+    static nextPageButton = '.comet-pagination-next > .comet-pagination-item-link'
+
+
+    navigate() {
+        cy.visit(HomePage.url)
     }
 
-    navigate(){
-        cy.visit(this.url)
+    checkCookiesManagement() {
+        this.checkElementVisibility(HomePage.cookiesManagement);
     }
 
-    checkCookiesManagement(){
-        base_page.checkElementVisibility(this.cookiesManagement);
+    personalizeCookiesButton() {
+        this.clickElement(HomePage.personalizeCookiesButtonLocator)
     }
 
-    personalizeCookiesButton(){
-        base_page.clickElement(this.personalizeCookiesButtonLocator)
+    clickSaveCookiesButton() {
+        this.clickElement(HomePage.cookiesSaveButtonLocator)
     }
 
-    clickSaveCookiesButton(){
-        base_page.clickElement(this.cookiesSaveButtonLocator)
+    closeWindowCookiesPersonalize() {
+        this.clickElement(HomePage.closeWindowPersonalize)
     }
 
-    closeWindowCookiesPersonalize(){
-        base_page.clickElement(this.closeWindowPersonalize)
+    acceptManagementCookies() {
+        this.clickElement(HomePage.cookiesAcceptButton)
     }
 
-    acceptManagementCookies(){
-        base_page.clickElement(this.cookiesAcceptButton)
+    checkPopUpVisibility() {
+        return this.checkElementVisibility(HomePage.popUpModal, {
+            timeout: 10000,
+            interval: 500
+        });
     }
 
     closePopUpModal() {
-        cy.waitUntil(() => 
-            base_page.checkElementVisibility(this.popUpModal, {
-                timeout: 10000, 
-                interval: 500
-            })
-        .then(() => {
-            cy.get(this.popUpModal).parent().invoke('hide');
-        }));
+        cy.get(HomePage.popUpModal).parent().invoke('hide');
     }
 
-    clickSearchBar(){
-        base_page.clickElement(this.searchBar)
+    clickSearchBar() {
+        this.clickElement(HomePage.searchBar)
     }
 
-    searchDiscoverMore(){
-        base_page.checkElementVisibility(this.discoverMore)
+    searchDiscoverMore() {
+        this.checkElementVisibility(HomePage.discoverMore)
     }
 
-    typeSearchEnter(searchTerm){
-        base_page.typeElement(this.searchBar, searchTerm)
+    typeSearchEnter(searchTerm) {
+        this.typeElement(HomePage.searchBar, searchTerm)
     }
 
-    checkSearchButton(){
-       base_page.checkElementVisibility(this.searchButton)
+    checkSearchButton() {
+        this.checkElementVisibility(HomePage.searchButton)
     }
-    
-    clickSearchButton(){
-       base_page.clickElement(this.searchButton)
+
+    clickSearchButton() {
+        this.clickElement(HomePage.searchButton)
     }
 
 }
